@@ -22,16 +22,16 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
         OpenMpi == 1.8.4 (Cuda aware) and Horovod (latest)
 
 %setup
-    # Set system locale
-    export LC_ALL=C
+
 
 %environment
 
     # Set system locale
-    export LC_ALL=C
-
     LD_LIBRARY_PATH=/usr/local/cuda-9.0/lib64:/usr/local/cuda-9.0/extras/CUPTI/lib64:/usr/local/nvidia/lib:/usr/local/nvidia/lib64:/.singularity.d/libs
     PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+    SCONS_HORRIBLE_REGRESSION_TEST_HACK=True
+    LANG=C.UTF-8 LC_ALL=C.UTF-8
+
   
 %post
     
@@ -80,8 +80,20 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
         python-dev \
         python-pip \
         python-setuptools \
-        swig \
+        scons \
         zip
+
+    export LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+# Install swig
+    mkdir -p /tmp/swig
+    cd /tmp/swig
+    wget -O swig-3.0.12.tar.gz https://downloads.sourceforge.net/project/swig/swig/swig-3.0.12/swig-3.0.12.tar.gz
+    tar xzf swig-3.0.12.tar.gz
+    cd swig-3.0.12
+    ./configure --prefix=/usr
+    make -j $(nproc)
+    make install
 
 # Update pip (I am keeping same version as that on swami)
     pip --no-cache-dir install --upgrade pip==9.0.3
@@ -134,4 +146,4 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 # Cleanup
     apt-get clean
     rm -rf /var/lib/apt/lists/*
-    rm -rf /tmp/openbabel /tmp/mpi /tmp/tflon_download
+    rm -rf /tmp/openbabel /tmp/mpi /tmp/tflon_download /tmp/swig
