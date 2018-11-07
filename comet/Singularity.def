@@ -99,6 +99,9 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
     pip --no-cache-dir install --upgrade pip==9.0.3
 
 # Additional python packages
+    
+    pip --no-cache-dir install pyscons
+    pip --no-cache-dir install Pyro4==4.12
     pip --no-cache-dir install numpy==1.14.0
     pip --no-cache-dir install pandas==0.22.0
 
