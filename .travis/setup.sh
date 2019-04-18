@@ -21,8 +21,8 @@ cd /tmp && \
     cd singularity
     ./autogen.sh
     ./configure --prefix=/usr/local 
-    make --silent
-    sudo make --silent install
+    make --quiet
+    sudo make --quiet install
 
 # Check Python
 
