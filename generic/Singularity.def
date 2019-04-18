@@ -77,13 +77,13 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Update pip
-    pip3 --no-cache-dir install --upgrade pip
+    python3 -m pip --no-cache-dir install --upgrade pip
 
 # Additional python packages
-    pip3 --no-cache-dir install numpy pandas openopt h5py pyarrow sklearn statsmodels matplotlib seaborn plotly
+    python3 -m pip --no-cache-dir install numpy pandas openopt h5py pyarrow sklearn statsmodels matplotlib seaborn plotly
 
 # Install Tensorflow-gpu
-    pip3 --no-cache-dir install tensorflow-gpu
+    python3 -m pip --no-cache-dir install tensorflow-gpu
 
 # Cleanup
     apt-get clean
