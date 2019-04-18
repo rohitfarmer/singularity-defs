@@ -18,7 +18,7 @@ sudo sed -i -e 's/^Defaults\tsecure_path.*$//' /etc/sudoers
 
 echo "Python Version:"
 python --version
-pip install sregistry[all]
+pip -q install sregistry[all]
 sregistry version
 
 echo "sregistry Version:"
@@ -26,7 +26,7 @@ echo "sregistry Version:"
 # Install Singularity
 
 cd /tmp && \
-    git clone -b vault/release-3.1.1 https://www.github.com/sylabs/singularity.git
+    git clone -b vault/release-2.4.2 https://www.github.com/sylabs/singularity.git
     cd singularity && \
     ./autogen.sh && \
     ./configure --prefix=/usr/local && \

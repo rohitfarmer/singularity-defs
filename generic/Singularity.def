@@ -34,8 +34,8 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
     # Change to tmp directory to download temporary files
     cd /tmp
 
-    apt-get -y update --fix-missing > /dev/null
-    apt-get install -y --no-install-recommends \
+    apt-get -qq -y update --fix-missing
+    apt-get -qq install -y --no-install-recommends \
         autoconf \
         automake \
         build-essential \
@@ -72,19 +72,19 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
         python3-dev \
         python3-pip \
         python3-setuptools \
-        zip > /dev/null
+        zip
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Update pip
-    python3 -m pip --no-cache-dir install --upgrade pip
+    python3 -m pip -q --no-cache-dir install --upgrade pip
 
 # Additional python packages
-    python3 -m pip --no-cache-dir install numpy pandas h5py pyarrow sklearn statsmodels matplotlib seaborn plotly
+    python3 -m pip -q --no-cache-dir install numpy pandas h5py pyarrow sklearn statsmodels matplotlib seaborn plotly
 
 # Install Tensorflow-gpu
-    python3 -m pip --no-cache-dir install tensorflow-gpu
+    python3 -m pip -q --no-cache-dir install tensorflow-gpu
 
 # Cleanup
-    apt-get clean
+    apt-get -qq clean
     rm -rf /var/lib/apt/lists/*
