@@ -34,8 +34,8 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
     # Change to tmp directory to download temporary files
     cd /tmp
 
-    apt-get -y update --fix-missing
-    apt-get install -y --no-install-recommends \
+    apt-get -qq -y update --fix-missing
+    apt-get -qq install -y --no-install-recommends \
         autoconf \
         automake \
         build-essential \
