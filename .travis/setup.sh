@@ -1,6 +1,6 @@
 #!/bin/bash
 
-sudo apt-get update && sudo apt-get install -y wget git \
+sudo apt-get -qq update && sudo apt-get -qq install -y wget git \
                                                     build-essential \
                                                     squashfs-tools \
                                                     libtool \
@@ -26,8 +26,8 @@ echo "sregistry Version:"
 # Install Singularity
 
 cd /tmp && \
-    git clone -b vault/release-2.5 https://www.github.com/sylabs/singularity.git
+    git clone -b vault/release-3.1.1 https://www.github.com/sylabs/singularity.git
     cd singularity && \
     ./autogen.sh && \
     ./configure --prefix=/usr/local && \
-    make && sudo make install
+    make && sudo make install > /dev/null
