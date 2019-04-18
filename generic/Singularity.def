@@ -80,7 +80,7 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
     python3 -m pip --no-cache-dir install --upgrade pip
 
 # Additional python packages
-    python3 -m pip --no-cache-dir install numpy pandas openopt h5py pyarrow sklearn statsmodels matplotlib seaborn plotly
+    python3 -m pip --no-cache-dir install numpy pandas h5py pyarrow sklearn statsmodels matplotlib seaborn plotly
 
 # Install Tensorflow-gpu
     python3 -m pip --no-cache-dir install tensorflow-gpu
