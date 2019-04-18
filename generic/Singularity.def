@@ -87,4 +87,4 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 # Cleanup
     apt-get -qq clean
-    rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/* > /dev/null

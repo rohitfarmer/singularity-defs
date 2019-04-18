@@ -16,7 +16,7 @@ before_install:
 
 script:
                                # recipe
-  - /bin/bash .travis/build.sh generic/Singularity.def
+  # - /bin/bash .travis/build.sh generic/Singularity.def
 
                                # recipe with tag
   #- /bin/bash .travis/build.sh --tag sneeze Singularity.tag
@@ -26,6 +26,6 @@ script:
   # Environment variables must be defined in CI encrypted secrets/settings
 
   #- /bin/bash .travis/build.sh --uri collection/container --tag tacos --cli google-storage Singularity
-  #- /bin/bash .travis/build.sh --uri collection/container --cli google-drive Singularity
+  - /bin/bash .travis/build.sh --uri collection/container --cli google-drive generic/Singularity.def
   #- /bin/bash .travis/build.sh --uri collection/container --cli globus Singularity
   #- /bin/bash .travis/build.sh --uri collection/container --cli registry Singularity
