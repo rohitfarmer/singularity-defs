@@ -58,7 +58,6 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
         libpcre3-dev \
         sqlite3 \
         libsqlite3-dev \
-        libssl \
         libssl-dev \
         libboost-dev \
         libboost-system-dev \
