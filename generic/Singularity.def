@@ -90,11 +90,11 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
 
 # Install R packages
     #R --silent --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
-    R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "WGCNA"), repos="https://cloud.r-project.org/")'
+    R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "WGCNA"), repos="https://cloud.r-project.org/")' > /dev/null
     
-    R --silent --slave -e 'if (!requireNamespace("BiocManager")) install.packages("BiocManager", repos="https://cloud.r-project.org/")'
-    R --silent --slave -e 'BiocManager::install()'
-    R --silent --slave -e 'BiocManager::install(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))'
+    R --silent --slave -e 'if (!requireNamespace("BiocManager")) install.packages("BiocManager", repos="https://cloud.r-project.org/")' > /dev/null
+    R --silent --slave -e 'library("BiocManager") BiocManager::install()'
+    R --silent --slave -e 'library("BiocManager") BiocManager::install(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))' > /dev/null
 
 # Cleanup
     apt-get -qq clean
