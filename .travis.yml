@@ -3,6 +3,9 @@ language: python
 
 sudo: true
 
+git:
+  quiet: true
+
 python:
     - "3.6"
 

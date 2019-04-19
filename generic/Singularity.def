@@ -58,6 +58,8 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
         libpcre3-dev \
         sqlite3 \
         libsqlite3-dev \
+        libssl \
+        libssl-dev \
         libboost-dev \
         libboost-system-dev \
         libboost-thread-dev \
@@ -88,7 +90,12 @@ From: nvidia/cuda:9.0-cudnn7-devel-ubuntu16.04
     # python3 -m pip -q --no-cache-dir install tensorflow-gpu
 
 # Install R packages
-    R --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
+    #R --silent --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
+    R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "WGCNA"), repos="https://cloud.r-project.org/")'
+    
+    R --silent --slave -e 'if (!requireNamespace("BiocManager")) install.packages("BiocManager", repos="https://cloud.r-project.org/")'
+    R --silent --slave -e 'BiocManager::install()'
+    R --silent --slave -e 'BiocManager::install(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))'
 
 # Cleanup
     apt-get -qq clean
