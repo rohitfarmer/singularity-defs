@@ -16,16 +16,16 @@ before_install:
 
 script:
                                # recipe
-  # - /bin/bash .travis/build.sh generic/Singularity.def
+  - /bin/bash .travis/build.sh generic/Singularity.def
 
                                # recipe with tag
-  #- /bin/bash .travis/build.sh --tag sneeze Singularity.tag
+  # - /bin/bash .travis/build.sh --tag sneeze Singularity.tag
 
   # Examples with upload to storage clients defined by sregistry
   # https://singularityhub.github.io/sregistry-cli/clients
   # Environment variables must be defined in CI encrypted secrets/settings
 
   #- /bin/bash .travis/build.sh --uri collection/container --tag tacos --cli google-storage Singularity
-  - /bin/bash .travis/build.sh  --cli google-drive generic/Singularity.def
+  # - /bin/bash .travis/build.sh  --cli google-drive generic/Singularity.def
   #- /bin/bash .travis/build.sh --uri collection/container --cli globus Singularity
   #- /bin/bash .travis/build.sh --uri collection/container --cli registry Singularity
