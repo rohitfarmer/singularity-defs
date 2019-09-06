@@ -63,23 +63,20 @@ From: ubuntu:xenial
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Install R 3.4
-        wget https://cran.r-project.org/src/base/R-3/R-3.4.4.tar.gz        
-        tar -zxf R-3.4.4.tar.gz
-        cd R-3.4.4
-        ./configure --with-cairo=yes
-        make
-        make install
+#        wget https://cran.r-project.org/src/base/R-3/R-3.4.4.tar.gz        
+#        tar -zxf R-3.4.4.tar.gz
+#        cd R-3.4.4
+#        ./configure --with-cairo=yes
+#        make
+#        make install
 
-# NEWS.pdf file is missing and will make installation crash.
-touch doc/NEWS.pdf
-make install
 # Install R packages
-        R --silent --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
-        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R")
+#        R --silent --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
+#        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R")
         biocLite()' > /dev/null
-        R --silent --slave -e 'biocLite(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery",
+#        R --silent --slave -e 'biocLite(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery",
         "mygene"))' > /dev/null
-        R --silent --slave -e 'install.packages(c("circlize", "cluster",
+#        R --silent --slave -e 'install.packages(c("circlize", "cluster",
             "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC",
             "rlang", "tidyverse", "tmod", "WGCNA", "eNetXplorer", "missForest
         s"), repos="https://cloud.r-project.org/")' > /dev/null
