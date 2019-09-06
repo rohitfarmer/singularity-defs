@@ -19,7 +19,7 @@ before_install:
 
 script:
                                # recipe
-  - /bin/bash .travis/build.sh generic/Singularity.def
+  - /bin/bash .travis/build.sh H5N1/Singularity.def
 
                                # recipe with tag
   # - /bin/bash .travis/build.sh --tag sneeze Singularity.tag
