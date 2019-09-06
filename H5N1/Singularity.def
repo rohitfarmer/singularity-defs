@@ -61,7 +61,7 @@ From: ubuntu:xenial
         libpango1.0-dev \
         vim \
         wget \
-        zip > /dev/null
+        zip
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
