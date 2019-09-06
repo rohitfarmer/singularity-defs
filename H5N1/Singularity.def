@@ -1,6 +1,5 @@
-BootStrap: debootstrap
-OSVersion: xenial
-MirrorURL:  http://us.archive.ubuntu.com/ubuntu/
+BootStrap: docker
+From: ubuntu:xenial
 
 %labels
 
@@ -59,12 +58,21 @@ MirrorURL:  http://us.archive.ubuntu.com/ubuntu/
         libboost-regex-dev \
         vim \
         wget \
-        r-base=3.4 \
-        r-base-dev \
         zip
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
+# Install R 3.4
+        wget https://cran.r-project.org/src/base/R-3/R-3.4.4.tar.gz        
+        tar -zxf R-3.4.4.tar.gz
+        cd R-3.4.4
+        ./configure --with-cairo=yes
+        make
+        make install
+
+# NEWS.pdf file is missing and will make installation crash.
+touch doc/NEWS.pdf
+make install
 # Install R packages
         R --silent --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
         R --silent --slave -e 'source("http://bioconductor.org/biocLite.R")
