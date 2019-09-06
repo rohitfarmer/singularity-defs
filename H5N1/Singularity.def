@@ -1,0 +1,81 @@
+BootStrap: debootstrap
+OSVersion: xenial
+MirrorURL:  http://us.archive.ubuntu.com/ubuntu/
+
+%labels
+
+    APPLICATION_NAME H5N1 Workflow
+    AUTHOR_NAME Rohit Farmer
+    AUTHOR_EMAIL rohit.farmer@gmail.com, rohit.farmer@nih.gov
+    YEAR 2019
+
+%help
+
+    This container conatins:
+        R 3.4
+        Bioconductor 3.6 
+
+%setup
+
+%environment
+
+    # Set system locale
+    PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
+    LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+  
+%post
+    
+    # Change to tmp directory to download temporary files
+    cd /tmp
+
+    apt-get -qq -y update --fix-missing
+    apt-get -qq install -y --no-install-recommends \
+        autoconf \
+        automake \
+        build-essential \
+        ca-certificates \
+        cmake \
+        gcc \
+        g++ \
+        gfortran \
+        git \
+        libtool \
+        libjpeg-dev \
+        libpng-dev \
+        libatlas-base-dev \
+        libxml2-dev \
+        zlib1g-dev \
+        libcairo2-dev \
+        libeigen2-dev \
+        libeigen3-dev \
+        libcupti-dev \
+        libpcre3-dev \
+        libssl-dev \
+        libboost-dev \
+        libboost-system-dev \
+        libboost-thread-dev \
+        libboost-serialization-dev \
+        libboost-regex-dev \
+        vim \
+        wget \
+        r-base=3.4 \
+        r-base-dev \
+        zip
+
+    export LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+# Install R packages
+        R --silent --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
+        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R")
+        biocLite()' > /dev/null
+        R --silent --slave -e 'biocLite(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery",
+        "mygene"))' > /dev/null
+        R --silent --slave -e 'install.packages(c("circlize", "cluster",
+            "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC",
+            "rlang", "tidyverse", "tmod", "WGCNA", "eNetXplorer", "missForest
+        s"), repos="https://cloud.r-project.org/")' > /dev/null
+    
+# Cleanup
+    apt-get -qq clean
+    rm -rf /var/lib/apt/lists/* > /dev/null
