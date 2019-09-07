@@ -4,15 +4,19 @@ From: ubuntu:xenial
 %labels
     APPLICATION_NAME H5N1 Workflow
     AUTHOR_NAME Rohit Farmer
-    AUTHOR_EMAIL rohit.farmer@gmail.com, rohit.farmer@nih.gov
+    AUTHOR_EMAIL rohit.farmer@gmail.com
     YEAR 2019
 
 %help
     This container conatins:
-        R 3.4
-        Bioconductor 3.6 
-
-%setup
+        R 3.4.4; Bioconductor 3.6 
+    R Packages:
+        circlize, cluster, data.table, ggdendro, gplots, gridExtra, lazyeval, 
+        plyr, pROC, rlang, tidyverse, tmod, eNetXplorer, missForest, RMySQL ,
+        WGCNA
+    Bioconductor Packages:
+        impute, preprocessCore, GO.db, AnnotationDbi, affy, Biobase, 
+        ComplexHeatmap, genefilter, GEOquery, mygene
 
 %environment
     # Set system locale
@@ -20,7 +24,6 @@ From: ubuntu:xenial
     LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 %post
-    
     # Change to tmp directory to download temporary files
     cd /tmp
 
@@ -30,6 +33,7 @@ From: ubuntu:xenial
         autoconf \
         automake \
         build-essential \
+        bzip2 \
         ca-certificates \
         cmake \
         gcc \
@@ -54,11 +58,11 @@ From: ubuntu:xenial
         libboost-serialization-dev \
         libboost-regex-dev \
         libreadline-dev \
-        bzip2 \
         libbz2-dev \
         liblzma-dev \
         libpcre++-dev \
         libpango1.0-dev \
+        openjdk-8-jdk \
         vim \
         wget \
         zip
@@ -76,8 +80,13 @@ From: ubuntu:xenial
 
 # Install R packages
         echo "Installing R packages"
-        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R"); biocLite(c("affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))' > /dev/null
-        R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "WGCNA", "eNetXplorer", "missForest"), repos="https://cloud.r-project.org/")' > /dev/null
+        R --silent --slave -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/mvtnorm/mvtnorm_1.0-8.tar.gz", repos = NULL)' > /dev/null
+
+        R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "eNetXplorer", "missForest", "RMySQL"), repos="https://cloud.r-project.org/")' > /dev/null
+        
+        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R"); biocLite(c("impute", "preprocessCore", "GO.db", "AnnotationDbi", "affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))' > /dev/null
+        
+        R --silent --slave -e 'install.packages(c("WGCNA"), repos="https://cloud.r-project.org/")' > /dev/null
 
 # Cleanup
     echo "Cleaning"
