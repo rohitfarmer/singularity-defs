@@ -29,6 +29,8 @@ From: ubuntu:xenial
 
     echo "Installing compilers and libraries"
     apt-get -qq -y update --fix-missing
+    apt-get -qq -y upgrade
+
     apt-get -qq install -y --no-install-recommends \
         autoconf \
         automake \
@@ -38,10 +40,12 @@ From: ubuntu:xenial
         cmake \
         gcc \
         g++ \
+        git \
         gfortran \
         libtool \
         libjpeg-dev \
         libpng-dev \
+        libtiff-dev \
         libatlas-base-dev \
         libxml2-dev \
         zlib1g-dev \
@@ -64,9 +68,16 @@ From: ubuntu:xenial
         libpango1.0-dev \
         libmariadb-client-lgpl-dev \
         openjdk-8-jdk \
+        python-software-properties \
+        python3-software-properties \
+        software-properties-common \
         vim \
         wget \
         zip
+
+        add-apt-repository ppa:neovim-ppa/stable
+        apt-get -qq -y update --fix-missing
+        apt-get -qq install -y --no-install-recommends neovim
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
