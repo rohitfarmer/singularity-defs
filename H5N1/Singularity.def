@@ -29,8 +29,8 @@ From: ubuntu:xenial
 
     echo "Installing compilers and libraries"
     apt-get -qq -y update --fix-missing
-    apt-get -qq -y upgrade
-
+    apt-get -qq install -y --no-install-recommends apt-utils 
+    apt-get -qq -y update --fix-missing
     apt-get -qq install -y --no-install-recommends \
         autoconf \
         automake \
@@ -40,8 +40,8 @@ From: ubuntu:xenial
         cmake \
         gcc \
         g++ \
-        git \
         gfortran \
+        git \
         libtool \
         libjpeg-dev \
         libpng-dev \
@@ -50,7 +50,6 @@ From: ubuntu:xenial
         libxml2-dev \
         zlib1g-dev \
         libcairo2-dev \
-        libeigen2-dev \
         libeigen3-dev \
         libcupti-dev \
         libpcre3-dev \
@@ -61,18 +60,30 @@ From: ubuntu:xenial
         libboost-thread-dev \
         libboost-serialization-dev \
         libboost-regex-dev \
+        libgtk2.0-dev \
         libreadline-dev \
         libbz2-dev \
         liblzma-dev \
         libpcre++-dev \
         libpango1.0-dev \
         libmariadb-client-lgpl-dev \
+        libopenblas-dev \
+        liblapack-dev \
+        libxt-dev \
         openjdk-8-jdk \
+        python3-dev \
+        python3-pip \
+        python3-setuptools \
         python-software-properties \
         python3-software-properties \
         software-properties-common \
-        vim \
+        texlive \
+        texlive-fonts-extra \
+        texinfo \
         wget \
+        xvfb \
+        xauth \
+        xfonts-base \
         zip
 
         add-apt-repository ppa:neovim-ppa/stable
@@ -81,12 +92,18 @@ From: ubuntu:xenial
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
+# Install VIM
+        echo "Installing VIM"
+        git clone https://github.com/vim/vim.git
+        make -C vim/
+        make install -C vim/
+
 # Install R 3.4.4
         echo "Installing R 3.4.4"
         wget -q https://cran.r-project.org/src/base/R-3/R-3.4.4.tar.gz > /dev/null      
         tar -zxf R-3.4.4.tar.gz > /dev/null
         cd R-3.4.4
-        ./configure --with-x=no --with-cairo=yes > /dev/null
+        ./configure --enable-R-shlib  --with-x=no --with-cairo=yes  > /dev/null
         make > /dev/null
         make install > /dev/null
 
@@ -104,3 +121,4 @@ From: ubuntu:xenial
     echo "Cleaning"
     apt-get -qq clean
     rm -rf /var/lib/apt/lists/* > /dev/null
+    rm -rf vim/ > /dev/null
