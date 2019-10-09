@@ -16,7 +16,7 @@ To build a read-only SquashFS Singularity container on a local machine using a r
 ## Writable Sandbox
 To build a writable sandbox (essentially a folder) on a local machine using a recipe/definition file.  
 
-`sudo singularity build --writable <sandbox-folder-name/> <Singularity.def>`
+`sudo singularity build --sandbox  <sandbox-folder-name/> <Singularity.def>`
 
 *Note: The advantage of building a writable sandbox is that it can be used to install and configure packages as you go, and once you are satisfied with the requirements, the sandbox can be converted into a read-only SquashFS container. To build a sandbox quickly, it's better to install a minimal set of packages via the definition file.*  
 

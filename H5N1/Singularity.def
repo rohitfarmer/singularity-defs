@@ -111,7 +111,7 @@ From: ubuntu:xenial
         echo "Installing R packages"
         R --silent --slave -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/mvtnorm/mvtnorm_1.0-8.tar.gz", repos = NULL)' > /dev/null
 
-        R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "eNetXplorer", "missForest", "RMySQL"), repos="https://cloud.r-project.org/")' > /dev/null
+        R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "eNetXplorer", "missForest", "RMySQL", "fpc"), repos="https://cloud.r-project.org/")' > /dev/null
         
         R --silent --slave -e 'source("http://bioconductor.org/biocLite.R"); biocLite(c("impute", "preprocessCore", "GO.db", "AnnotationDbi", "affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))' > /dev/null
         
