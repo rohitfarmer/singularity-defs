@@ -9,7 +9,10 @@ From: ubuntu:xenial
 
 %help
     This container conatins:
-        R 3.5.3 
+        R 3.5.3
+    Python3:
+        jupyter notebook
+    Rstudio Server
 
 %environment
     # Set system locale

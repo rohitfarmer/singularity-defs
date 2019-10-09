@@ -12,13 +12,14 @@ From: rocker/rstudio:3.5.3
         R 3.5.3
     Python3:
         jupyter notebook
+    Rocker:
+        Rstudio
 
 %environment
     # Set system locale
     PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
     LANG=C.UTF-8 LC_ALL=C.UTF-8
     
-
 %post
     # Change to tmp directory to download temporary files
     cd /tmp
@@ -91,38 +92,38 @@ From: rocker/rstudio:3.5.3
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
 # Install R 3.5.3
-#        echo "Installing R 3.5.3"
-#        wget -q https://cran.r-project.org/src/base/R-3/R-3.5.3.tar.gz > /dev/null      
-#        tar -zxf R-3.5.3.tar.gz > /dev/null
-#        cd R-3.5.3
-#        ./configure  > /dev/null
-#        make > /dev/null
-#        make install > /dev/null
+        echo "Installing R 3.5.3"
+        wget -q https://cran.r-project.org/src/base/R-3/R-3.5.3.tar.gz > /dev/null      
+        tar -zxf R-3.5.3.tar.gz > /dev/null
+        cd R-3.5.3
+        ./configure  > /dev/null
+        make > /dev/null
+        make install > /dev/null
 
 # Install Jupyter notebook
-#        echo "Installing Jupyter notebook"
-#        python3 -m pip --no-cache-dir install --upgrade pip > /dev/null
-#        python3 -m pip --no-cache-dir install jupyter > /dev/null
+        echo "Installing Jupyter notebook"
+        python3 -m pip --no-cache-dir install --upgrade pip > /dev/null
+        python3 -m pip --no-cache-dir install jupyter > /dev/null
 
-#        R --quiet --slave -e 'install.packages(c("IRkernel"), repos="https://cloud.r-project.org/")' > /dev/null
-#        R --quiet --slave -e 'IRkernel::installspec()' > /dev/null
+        R --quiet --slave -e 'install.packages(c("IRkernel"), repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'IRkernel::installspec()' > /dev/null
 
 # Install R packages
-#        echo "Installing R packages"
-#        R --quite --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")' > /dev/null
-#        R --quiet --slave -e 'library(devtools); install_version("tidyverse", version = "1.2.1", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("Seurat", version = "2.3.4", repos="https://cloud.r-project.org/")' > /dev/null
-#        R --quiet --slave -e 'library(devtools); install_version("parallelDist", version = "0.2.4", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("MASS", version = "7.3-51.1", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("corrplot", version = "0.84", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("ggridges", version = "0.5.1", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("ggrepel", version = "0.8.0", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("mclust", version = "5.4.3", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("pheatmap", version = "1.0.10", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("here", version = "0.1", repos="https://cloud.r-project.org/")' > /dev/null
-         R --quiet --slave -e 'library(devtools); install_version("clustree", version = "0.4.0", repos="https://cloud.r-project.org/")' > /dev/null
+        echo "Installing R packages"
+        R --quite --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("tidyverse", version = "1.2.1", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("Seurat", version = "2.3.4", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("parallelDist", version = "0.2.4", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("MASS", version = "7.3-51.1", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("corrplot", version = "0.84", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("ggridges", version = "0.5.1", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("ggrepel", version = "0.8.0", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("mclust", version = "5.4.3", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("pheatmap", version = "1.0.10", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("here", version = "0.1", repos="https://cloud.r-project.org/")' > /dev/null
+        R --quiet --slave -e 'library(devtools); install_version("clustree", version = "0.4.0", repos="https://cloud.r-project.org/")' > /dev/null
 
-         R --silent --slave -e 'source("http://bioconductor.org/biocLite.R"); biocLite(c("SingleCellExperiment", "scran", "scater", "AUCell", "destiny", "limma", "edgeR", "fgsea"))' > /dev/null
+        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R"); biocLite(c("SingleCellExperiment", "scran", "scater", "AUCell", "destiny", "limma", "edgeR", "fgsea"))' > /dev/null
 
 # Cleanup
     echo "Cleaning"
