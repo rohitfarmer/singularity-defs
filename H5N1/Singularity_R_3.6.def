@@ -9,7 +9,7 @@ From: ubuntu:xenial
 
 %help
     This container conatins:
-        R 3.4.4; Bioconductor 3.6 
+        R 3.6; Bioconductor 3.6 
     R Packages:
         circlize, cluster, data.table, ggdendro, gplots, gridExtra, lazyeval, 
         plyr, pROC, rlang, tidyverse, tmod, eNetXplorer, missForest, RMySQL ,
@@ -97,30 +97,26 @@ From: ubuntu:xenial
         git clone https://github.com/vim/vim.git
         make -C vim/
         make install -C vim/
+        rm -rf vim/
 
-# Install R 3.4.4
-        echo "Installing R 3.4.4"
-        wget -q https://cran.r-project.org/src/base/R-3/R-3.4.4.tar.gz > /dev/null      
-        tar -zxf R-3.4.4.tar.gz > /dev/null
-        cd R-3.4.4
+# Install R 3.6
+        echo "Installing R 3.6"
+        wget -q https://cran.r-project.org/src/base/R-3/R-3.6.2.tar.gz > /dev/null      
+        tar -zxf R-3.6.2.tar.gz > /dev/null
+        cd R-3.6.2
         ./configure --enable-R-shlib  --with-x=no --with-cairo=yes  > /dev/null
         make > /dev/null
         make install > /dev/null
 
 # Install R packages
         echo "Installing R packages"
-        R --silent --slave -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/mvtnorm/mvtnorm_1.0-8.tar.gz", repos = NULL)' > /dev/null
+        R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "eNetXplorer", "missForest", "RMySQL", "fpc", "ggrepel", "ppcor", "BiocManager"), repos="https://cloud.r-project.org/")' > /dev/null
         
-        R --silent --slave -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/Hmisc/Hmisc_4.1-0.tar.gz", repos = NULL)' > /dev/null
+        R --silent --slave -e 'BiocManager::install(c("impute", "preprocessCore", "GO.db", "AnnotationDbi", "affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))' > /dev/null
 
-        R --silent --slave -e 'install.packages(c("circlize", "cluster", "data.table", "ggdendro", "gplots", "gridExtra", "lazyeval", "plyr", "pROC", "rlang", "tidyverse", "tmod", "eNetXplorer", "missForest", "RMySQL", "fpc", "ggrepel", "ppcor"), repos="https://cloud.r-project.org/")' > /dev/null
-        
-        R --silent --slave -e 'source("http://bioconductor.org/biocLite.R"); biocLite(c("impute", "preprocessCore", "GO.db", "AnnotationDbi", "affy", "Biobase", "ComplexHeatmap", "genefilter", "GEOquery", "mygene"))' > /dev/null
-        
         R --silent --slave -e 'install.packages(c("WGCNA"), repos="https://cloud.r-project.org/")' > /dev/null
 
 # Cleanup
     echo "Cleaning"
     apt-get -qq clean
     rm -rf /var/lib/apt/lists/* > /dev/null
-    rm -rf vim/ > /dev/null
