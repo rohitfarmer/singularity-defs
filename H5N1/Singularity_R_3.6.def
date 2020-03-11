@@ -94,10 +94,12 @@ From: ubuntu:xenial
 
 # Install VIM
         echo "Installing VIM"
+        if [ -d vim ]; then
+           rm -rf vim
+        fi
         git clone https://github.com/vim/vim.git
         make -C vim/
         make install -C vim/
-        rm -rf vim/
 
 # Install R 3.6
         echo "Installing R 3.6"
@@ -120,3 +122,4 @@ From: ubuntu:xenial
     echo "Cleaning"
     apt-get -qq clean
     rm -rf /var/lib/apt/lists/* > /dev/null
+    rm -rf /tmp/vim
