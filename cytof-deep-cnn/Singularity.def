@@ -40,6 +40,7 @@ From: debian:buster
                 g++ \
                 gfortran \
                 git \
+                graphviz \
                 libtool \
                 libjpeg-dev \
                 libpng-dev \
@@ -83,8 +84,7 @@ From: debian:buster
 
 # Install Python Packages
         python3 -m pip --no-cache-dir install --upgrade pip
-        python3 -m pip --no-cache-dir install numpy==1.16.4 pandas==0.24.2 
-        python3 -m pip --no-cache-dir install tensorflow==1.13.1 Keras==2.2.4 sklearn==0.21.3 matplotlib==3.1.1 seaborn==0.9.0 pydotplus==2.0.2 graphviz > /dev/null
+        python3 -m pip --no-cache-dir install numpy==1.16.4 pandas==0.24.2 tensorflow==1.13.1 Keras==2.2.4 scikit-learn==0.21.3 matplotlib==3.1.1 seaborn==0.9.0 pydotplus==2.0.2 graphviz
 
 # Install Jupyter Notebook
         echo "Installing Jupyter notebook"
