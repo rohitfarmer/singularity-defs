@@ -97,6 +97,7 @@ From: ubuntu:xenial
         make install
 
 # Install R packages
+        # CRAN Packages
         R --quite --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("tidyverse", version = "1.2.1", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("parallelDist", version = "0.2.4", repos="https://cloud.r-project.org/")'
@@ -122,16 +123,23 @@ From: ubuntu:xenial
         R --quiet --slave -e 'library(devtools); install_version("umap", version = "0.2.3.1", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("viridis", version = "0.5.1", repos="https://cloud.r-project.org/")' 
         ##R --quiet --slave -e 'library(devtools); install_version("clustree", version = "0.4.0", repos="https://cloud.r-project.org/")' 
-
-         R --silent --slave -e 'install.packages("BiocManager", repos="https://cloud.r-project.org/")'
-         R --silent --slave -e 'BiocManager::install(version = "3.8")'
-         R --silent --slave -e 'BiocManager::install(c("AnnotationDbi", "clusterProfiler", "fgsea", "org.Hs.eg.db", "scater", "scran", "SingleCellExperiment","variancePartition"))'
-
         R --quiet --slave -e 'library(devtools); install_version("SDMTools", version = "1.1-221.2", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("latticeExtra", version = "0.6-28", repos="https://cloud.r-project.org/")' 
-        R --quiet --slave -e 'library(devtools); install_version("Hmisc", version = "4.3-1", repos="https://cloud.r-project.org/")'
+        R --quiet --slave -e 'library(devtools); install_version("Hmisc", version = "4.2-0", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("metap", version = "1.1", repos="https://cloud.r-project.org/")'
+
+        # Bioconductor Packages
+        R --silent --slave -e 'install.packages("BiocManager", repos="https://cloud.r-project.org/")'
+        R --silent --slave -e 'BiocManager::install(version = "3.8")'
+        R --silent --slave -e 'BiocManager::install(c("AnnotationDbi", "clusterProfiler", "fgsea", "org.Hs.eg.db", "scater", "scran", "ShortRead", "SingleCellExperiment","variancePartition"))'
+         
+        # Seurat
         R --quiet --slave -e 'chooseCRANmirror(ind = 1); source("https://z.umn.edu/archived-seurat")'
+
+        # GitHub packages
+        R --quiet --slave -e 'library(devtools); devtools::install_github("chris-mcginnis-ucsf/MULTI-seq")'
+        R --quiet --slave -e 'library(devtools); devtools::install_github("MattPM/dsb")'
+        
 # Cleanup
     echo "Cleaning"
     apt-get -qq clean
