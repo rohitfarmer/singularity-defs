@@ -102,10 +102,8 @@ From: ubuntu:xenial
         R --quiet --slave -e 'library(devtools); install_version("tidyverse", version = "1.2.1", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("parallelDist", version = "0.2.4", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("MASS", version = "7.3-51.1", repos="https://cloud.r-project.org/")' 
-        ##R --quiet --slave -e 'library(devtools); install_version("corrplot", version = "0.84", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("ggridges", version = "0.5.1", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("ggrepel", version = "0.8.1", repos="https://cloud.r-project.org/")' 
-        ##R --quiet --slave -e 'library(devtools); install_version("mclust", version = "5.4.3", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("pheatmap", version = "1.0.12", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("here", version = "0.1", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("caTools", version = "1.17.1.2", repos="https://cloud.r-project.org/")' 
@@ -122,11 +120,11 @@ From: ubuntu:xenial
         R --quiet --slave -e 'library(devtools); install_version("reticulate", version = "1.12", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("umap", version = "0.2.3.1", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("viridis", version = "0.5.1", repos="https://cloud.r-project.org/")' 
-        ##R --quiet --slave -e 'library(devtools); install_version("clustree", version = "0.4.0", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("SDMTools", version = "1.1-221.2", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("latticeExtra", version = "0.6-28", repos="https://cloud.r-project.org/")' 
         R --quiet --slave -e 'library(devtools); install_version("Hmisc", version = "4.2-0", repos="https://cloud.r-project.org/")'
         R --quiet --slave -e 'library(devtools); install_version("metap", version = "1.1", repos="https://cloud.r-project.org/")'
+        R --quiet --slave -e 'library(devtools); install_version("ROCR", version = "1.0-7", repos="https://cloud.r-project.org/")'
 
         # Bioconductor Packages
         R --silent --slave -e 'install.packages("BiocManager", repos="https://cloud.r-project.org/")'
