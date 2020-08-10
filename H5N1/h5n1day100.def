@@ -72,6 +72,10 @@ From: ubuntu:bionic
         libxt-dev \
         neovim \
         openjdk-8-jdk \
+        python3-dev \
+        python3-pip \
+        python3-wheel \
+        software-properties-common \
         texlive \
         texlive-fonts-extra \
         texinfo \
@@ -84,6 +88,30 @@ From: ubuntu:bionic
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
 
+# Install R 3.5.1
+        wget -q https://cran.r-project.org/src/base/R-3/R-3.5.1.tar.gz
+        tar -zxf R-3.5.1.tar.gz
+        cd R-3.5.1
+        ./configure 
+        make
+        make install
+
+# Install Python Packages
+        python3 -m pip --no-cache-dir install --upgrade pip
+        python3 -m pip --no-cache-dir install setuptools --upgrade
+
+        python3 -m pip --no-cache-dir install snakemake==5.5.0
+
+# Install R packages
+        # CRAN Packages
+        R --quite --slave -e 'install.packages("devtools", repos="https://cloud.r-project.org/")'
+        R --quiet --slave -e 'library(devtools); install_version("caTools", version = "1.17.1.2", repos="https://cloud.r-project.org/")' 
+
+# Bioconductor Packages
+        R --silent --slave -e 'install.packages("BiocManager", version = "1.30", repos="https://cloud.r-project.org/")'
+        #R --silent --slave -e 'BiocManager::install("BioBase", version = "2.42", repos="https://cloud.r-project.org/")'
+
 # Cleanup
     apt-get -qq clean
     rm -rf /var/lib/apt/lists/*
+    rm -rf /tmp/R-3.5.1/
