@@ -11,9 +11,12 @@ Follow the instructions on [https://sylabs.io/guides/3.4/user-guide/quick_start.
 ## Readonly Container
 To build a read-only SquashFS Singularity container on a local machine using a recipe/definition file.  
 
-`sudo singularity build <container-name.sif> <Singularity.def>`
+`sudo singularity build <container-name.sif> <Singularity.def>`  
 
-## Writable Sandbox
+To set a different temporary directory than the default `/tmp`.  
+`sudo -E SINGULARITY_TMPDIR=/home/rohit/tmp singularity build <container.sif> <container.def>`
+
+## Writable Sandbox.
 To build a writable sandbox (essentially a folder) on a local machine using a recipe/definition file.  
 
 `sudo singularity build --sandbox  <sandbox-folder-name/> <Singularity.def>`
