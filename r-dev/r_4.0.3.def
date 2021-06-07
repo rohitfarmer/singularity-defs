@@ -2,14 +2,14 @@ BootStrap: docker
 From: ubuntu:bionic
 
 %labels
-    APPLICATION_NAME R 4.0.3
+    APPLICATION_NAME R 4.0.3 on Bionic
     AUTHOR_NAME Rohit Farmer
     AUTHOR_EMAIL rohit.farmer@gmail.com
     YEAR 2021
 
 %help
     This container conatins:
-        R 4.0.3
+        R 4.0.3 on Bionic
 
 %environment
     # Set system locale
@@ -41,17 +41,20 @@ From: ubuntu:bionic
         bzip2 \
         ca-certificates \
         cmake \
+        curl \
+        fuse \
         gcc \
         g++ \
         gfortran \
         git \
+        gdal-bin \
+        libgdal-dev \
         libtool \
         libjpeg-dev \
         libpng-dev \
         libtiff-dev \
         libatlas-base-dev \
         libxml2-dev \
-        zlib1g-dev \
         libcairo2-dev \
         libeigen3-dev \
         libcupti-dev \
@@ -71,8 +74,11 @@ From: ubuntu:bionic
         libpango1.0-dev \
         libopenblas-dev \
         liblapack-dev \
+	libudunits2-dev \
+	libv8-dev \
         libxt-dev \
         openjdk-8-jdk \
+	proj-bin \
         python3-neovim \
         python3-dev \
         python3-pip \
@@ -80,14 +86,17 @@ From: ubuntu:bionic
         texlive \
         texlive-fonts-extra \
         texinfo \
-        vim \
         wget \
         xvfb \
         xauth \
         xfonts-base \
+        zlib1g-dev \
         zip
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
+
+# Clean /tmp of any previous downloads
+        rm -rf /tmp/*
 
 # Install libgit2
         wget -q https://github.com/libgit2/libgit2/releases/download/v1.1.0/libgit2-1.1.0.tar.gz
@@ -98,7 +107,16 @@ From: ubuntu:bionic
         cmake --build . --target install
         cd /tmp
 
-# Install R 3.6.3
+# Install PCRE2
+        wget -q https://ftp.pcre.org/pub/pcre/pcre2-10.36.tar.gz
+        tar -zxvf pcre2-10.36.tar.gz
+        cd pcre2-10.36
+        ./configure
+        make
+        make install
+        cd /tmp
+
+# Install R 4.0.3
         wget -q https://cran.r-project.org/src/base/R-4/R-4.0.3.tar.gz 
         tar -zxf R-4.0.3.tar.gz
         cd R-4.0.3
@@ -111,4 +129,4 @@ From: ubuntu:bionic
     echo "Cleaning"
     apt-get -qq clean
     rm -rf /var/lib/apt/lists/*
-    rm -rf /tmp/
+    rm -rf /tmp/*
