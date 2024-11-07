@@ -1,5 +1,5 @@
 BootStrap: docker
-From: ubuntu:focal
+From: ubuntu:bionic
 
 %labels
     APPLICATION_NAME PhiP-Seq
@@ -18,8 +18,8 @@ From: ubuntu:focal
 %environment
     # Set system locale
     PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin
-    LANG=C.UTF-8 LC_ALL=C.UTF-8
-    
+    export LC_ALL=C.UTF-8
+    export LANG=C.UTF-8 
 
 %post
     # Change to tmp directory to download temporary files
@@ -104,32 +104,17 @@ From: ubuntu:focal
         zlib1g-dev \
         zip \
         bowtie2 \
-        samtools
+        samtools \
+        fastx-toolkit
 
-    export LANG=C.UTF-8 LC_ALL=C.UTF-8
+        export LC_ALL=C.UTF-8
+        export LANG=C.UTF-8 
 
 # Clean /tmp of any previous downloads
         rm -rf /tmp/singularity-build/*
 
-# Install Fastx Toolkit
-#	wget https://github.com/agordon/fastx_toolkit/releases/download/0.0.14/fastx_toolkit-0.0.14.tar.bz2
-#	tar -xjvf fastx_toolkit-0.0.14.tar.bz2
-#	cd fastx_toolkit-0.0.14
-#	./configure
-#	make
-#        cd /tmp/singularity-build
-
 # Install Phip-Stat
         python3 -m pip install phip-stat --no-input
-
-# Install R 4.3.0
-        wget -q https://cran.r-project.org/src/base/R-4/R-4.3.0.tar.gz 
-        tar -zxf R-4.3.0.tar.gz
-        cd R-4.3.0
-        ./configure
-        make
-        make install
-        cd /tmp/singularity-build
 
 # Cleanup
     echo "Cleaning"
