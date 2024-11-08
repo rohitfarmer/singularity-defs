@@ -206,11 +206,12 @@ From: ubuntu:bionic
 	ln -s /opt/sratoolkit.2.9.6-1-ubuntu64/bin/fastq-dump /usr/bin/fastq-dump
  
 # Pull latest SONAR source code and set it up
-	cd /tmp/singularity-build/
+	cd /opt
 	git clone https://github.com/scharch/SONAR.git
 	cd SONAR
 	echo | ./setup.py
 	cp sonar /usr/bin
+        cd /tmp/singularity-build/
 
 # Cleanup
 	echo "Cleaning"
