@@ -5,7 +5,7 @@ From: ubuntu:bionic
     APPLICATION_NAME SONAR on Ubuntu Bionic 
     AUTHOR_NAME Rohit Farmer
     AUTHOR_EMAIL rohit.farmer@gmail.com
-    YEAR 2024
+    YEAR 2025
 
 %help
     This container conatins:
@@ -20,6 +20,8 @@ From: ubuntu:bionic
 
 %post
     # Change to tmp directory to download temporary files
+    rm -r /tmp/singularity-build
+    mkdir /tmp/singularity-build
     cd /tmp/singularity-build
 
     echo "Installing compilers and libraries"
@@ -175,6 +177,7 @@ From: ubuntu:bionic
 	python3 -m pip install scikit-build --no-input
 	python3 -m pip install networkx --no-input
 	python3 -m pip install python-Levenshtein --no-input
+	python3 -m pip install openpyxl --no-input
 
 # Install R 3.5.3
 	wget -q https://cran.r-project.org/src/base/R-3/R-3.5.3.tar.gz
@@ -186,17 +189,19 @@ From: ubuntu:bionic
         cd /tmp/singularity-build/
 
 # Install R packages
-        R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/glue/glue_1.6.2.tar.gz")'
+	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/glue/glue_1.6.2.tar.gz")'
 	R --vanilla -e 'install.packages(c("cli", "rlang"), repos="http://cran.r-project.org/")'
-        R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/lifecycle/lifecycle_1.0.3.tar.gz")'
-        R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtable/gtable_0.3.5.tar.gz")'
+	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/lifecycle/lifecycle_1.0.3.tar.gz")'
+	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/gtable/gtable_0.3.5.tar.gz")'
 	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/MASS/MASS_7.3-58.tar.gz")'
-	R --vanilla -e 'install.packages(c("farver", "labeling", "munsell", "R6", "RColorBrewer", "viridisLite"), repos="http://cran.r-project.org/")'
-        R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/scales/scales_1.2.1.tar.gz")'
-        R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/withr/withr_3.0.0.tar.gz")'
-	R --vanilla -e 'install.packages(c("isoband", "tibble", "vctrs"), repos="http://cran.r-project.org/")'
+	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/R6/R6_2.5.1.tar.gz")'
+	R --vanilla -e 'install.packages(c("farver", "labeling", "munsell", "RColorBrewer", "viridisLite"), repos="http://cran.r-project.org/")'
+	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/scales/scales_1.2.1.tar.gz")'
+	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/withr/withr_3.0.0.tar.gz")'
 	R --vanilla -e 'install.packages("https://cran.r-project.org/src/contrib/Archive/ggplot2/ggplot2_3.4.4.tar.gz")'
+	R --vanilla -e 'install.packages(c("isoband", "tibble", "vctrs"), repos="http://cran.r-project.org/")'
 	R --vanilla -e 'install.packages(c("docopt", "ptinpoly"), repos="http://cran.r-project.org/")'
+
 
 # Install fastq-dump for vignette
 	cd /opt
