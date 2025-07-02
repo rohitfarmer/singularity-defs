@@ -2,14 +2,14 @@ BootStrap: docker
 From: ubuntu:bionic
 
 %labels
-    APPLICATION_NAME CZID R 4.2.1 on Bionic
+    APPLICATION_NAME CZID on Bionic
     AUTHOR_NAME Rohit Farmer
     AUTHOR_EMAIL rohit.farmer@gmail.com
     YEAR 2024
 
 %help
     This container conatins:
-        CZID R 4.2.1 on Bionic
+        CZID on Bionic
 
 %environment
     # Set system locale
@@ -105,32 +105,11 @@ From: ubuntu:bionic
 # Clean /tmp of any previous downloads
         rm -rf /tmp/singularity-build/*
 
-# Install libgit2
-        wget -q https://github.com/libgit2/libgit2/releases/download/v1.1.0/libgit2-1.1.0.tar.gz
-        tar -zxf libgit2-1.1.0.tar.gz
-        cd libgit2-1.1.0
-        mkdir build && cd build
-        cmake ..
-        cmake --build . --target install
-        cd /tmp/singularity-build
-
-# Install PCRE2
-        #wget -q https://ftp.pcre.org/pub/pcre/pcre2-10.36.tar.gz
-        #tar -zxvf pcre2-10.36.tar.gz
-        #cd pcre2-10.36
-        #./configure
-        #make
-        #make install
-        #cd /tmp/singularity-build
-
-# Install R 4.2.1
-        wget -q https://cran.r-project.org/src/base/R-4/R-4.2.1.tar.gz 
-        tar -zxf R-4.2.1.tar.gz
-        cd R-4.2.1
-        ./configure
-        make
-        make install
-        cd /tmp/singularity-build
+# Install CZID
+	curl -L https://github.com/chanzuckerberg/czid-cli/releases/latest/download/czid-cli_linux_amd64.deb -o czid-cli_linux_amd64.deb
+        dpkg -i czid-cli_linux_amd64.deb
+        apt-get -y update
+        apt-get install -f -y --no-install-recommends
 
 # Cleanup
     echo "Cleaning"
