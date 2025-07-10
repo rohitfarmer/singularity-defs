@@ -53,19 +53,28 @@ From: ubuntu:noble
 	python3-pybedtools \
 	python3-requests python3-pandas \
         python3-bs4 \
-        muscle \
         ncbi-blast+ \
+        bedtools \
 	gcc-multilib \
 	make \
 	zip
 
     export LANG=C.UTF-8 LC_ALL=C.UTF-8
+    export ALIGATOR_PATH=/opt/aligator
 
 # Clean /tmp of any previous downloads
 	rm -rf /tmp/singularity-build/*
 
 # Create a symlink for python to python3 
         ln -s /bin/python3 /bin/python
+
+# Install Muscle
+        cd /usr/local/bin
+        wget https://drive5.com/muscle/downloads3.8.31/muscle3.8.31_i86linux64.tar.gz
+        tar -zxvf muscle3.8.31_i86linux64.tar.gz
+        mv muscle3.8.31_i86linux64 muscle
+        chmod a+x muscle
+        rm muscle3.8.31_i86linux64.tar.gz
 
 # Install Aligator
         cd /opt
